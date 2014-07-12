@@ -28,3 +28,16 @@ module.exports = (robot) ->
       msg.send stdout
       msg.send stderr
 
+ robot.respond /switch server from (.*) to (.*)$/i, (msg) ->
+    stop_server = msg.match[1]
+    start_server = msg.match[2]
+    @exec = require('child_process').exec
+    stop_command = "/usr/local/bin/supervisorctl stop #{stop_server}"
+    
+
+    msg.send "Stopping #{stop_server}..."
+
+    @exec stop_command, (error, stdout, stderr) ->
+      msg.send error
+      msg.send stdout
+      msg.send stderr
