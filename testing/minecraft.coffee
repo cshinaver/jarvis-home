@@ -1,15 +1,9 @@
-# Description:
-#  Execute a shell command if you can't be bothered to learn coffee script.
-#  This particular example just does a DNS lookup.
+# Switch server command
+# Takes minecraft server name as argument and switches to new minecraft server
 #
-# Dependencies:
-#  None
+# Author: Charles Shinaver
 #
-# Configuration
-#  Change the script if you want to exeute a different command
 #
-# Commands:
-#  hubot host lookup <hostname>
 #
 # Author:
 #  Sapan Ganguly
