@@ -76,6 +76,6 @@ module.exports = (robot) ->
       is_running = /RUNNING/.test(stdout)
       if is_running
         console.log "#{process} is running."
-        stop_process process, => start_process new_process
+        stop_process process, -> start_process new_process
    
 
