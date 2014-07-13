@@ -63,7 +63,6 @@ module.exports = (robot) ->
           exec (status_command process), (error, stdout, stderr) ->
             is_running = /RUNNING/.test(stdout)
             if is_running
-              msg.send "stdout #{stdout}"
               msg.send "#{process} successfully started"
             else
               msg.send "Didn't start? \nstdout:#{stdout}\nerror:#{error}\nstderr:#{stderr}"
