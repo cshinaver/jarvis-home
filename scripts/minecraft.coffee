@@ -1,20 +1,12 @@
-# Description:
-#  Execute a shell command if you can't be bothered to learn coffee script.
-#  This particular example just does a DNS lookup.
+# Switch server command
+# Takes minecraft server name as argument
+# and switches to new minecraft server
 #
-# Dependencies:
-#  None
+# Author: Charles Shinaver
 #
-# Configuration
-#  Change the script if you want to exeute a different command
 #
-# Commands:
-#  hubot host lookup <hostname>
 #
-# Author:
-#  Sapan Ganguly
 #
-
 module.exports = (robot) ->
   robot.respond /server status$/i, (msg) ->
     exec = require('child_process').exec
@@ -28,7 +20,7 @@ module.exports = (robot) ->
       msg.send stdout
       msg.send stderr
 
-  robot.respond /switch server (\w+) to (\w+)$/i, (msg) ->
+  robot.respond /switch (\w+) to (\w+)$/i, (msg) ->
     process = msg.match[1]
     new_process = msg.match[2]
     status_command = (process) ->
@@ -69,6 +61,7 @@ module.exports = (robot) ->
     
     # Switches processes
     exec (status_command process), (error, stdout, stderr) ->
+      msg.send "Switching from #{process} to #{new_process}..."
       # Kill process if already running
       is_running = /RUNNING/.test(stdout)
       if is_running
