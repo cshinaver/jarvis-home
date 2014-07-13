@@ -28,9 +28,9 @@ module.exports = (robot) ->
       msg.send stdout
       msg.send stderr
 
-  robot.respond /switch server$/i, (msg) ->
-    process = "dropbox"
-    new_process = "transmission"
+  robot.respond /switch server (\w+) to (\w+)$/i, (msg) ->
+    process = msg.match[1]
+    new_process = msg.match[2]
     status_command = (process) ->
       "/usr/local/bin/supervisorctl status #{process}"
     exec = require('child_process').exec
@@ -53,7 +53,7 @@ module.exports = (robot) ->
             callback stdout
     
     start_process = (process) ->
-      msg.send "Starting #{process}"
+      msg.send "Starting #{process}..."
       command = "/usr/local/bin/supervisorctl start #{process}"
       exec command, (error, stdout, stderr) ->
         if error
