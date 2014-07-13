@@ -21,13 +21,18 @@ stop_process = (process) ->
     if error
       console.log "There was an error.\n #{stdout}"
     else
-      console.log stdout
-      console.log "#{process} sucessfully shut down"
+      # Check if process sucessfully shut down
+      exec status_command, (error, stdout, stderr) ->
+        is_running = /RUNNING/.test(stdout)
+        if not is_running
+          console.log "#{process} sucessfully shut down"
 
 
 # Checks status of given process
 exec (full_command status_command), (error, stdout, stderr) ->
   is_running = /RUNNING/.test(stdout)
+
+  # Kill process if already running
   if is_running
     console.log "#{process} is running."
     stop_process process
