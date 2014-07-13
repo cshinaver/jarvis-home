@@ -8,6 +8,7 @@
 #
 # TODO: readd @ in front of exec
 process = "dropbox"
+new_process = "transmission"
 status_command = "/usr/local/bin/supervisorctl status #{process}"
 exec = require('child_process').exec
 full_command = (command) ->
@@ -36,5 +37,7 @@ exec (full_command status_command), (error, stdout, stderr) ->
   if is_running
     console.log "#{process} is running."
     stop_process process
+
+  # Start new process
 
 
