@@ -1,5 +1,6 @@
 # Switch server command
-# Takes minecraft server name as argument and switches to new minecraft server
+# Takes minecraft server name as argument
+# and switches to new minecraft server
 #
 # Author: Charles Shinaver
 #
