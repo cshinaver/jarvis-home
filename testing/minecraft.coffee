@@ -39,19 +39,21 @@ start_process = (process) ->
       exec (status_command process), (error, stdout, stderr) ->
         is_running = /RUNNING/.test(stdout)
         if is_running
+          console.log "stdout #{stdout}"
           console.log "#{process} successfully started"
+        else 
+          console.log "Didn't start? #{stdout}"
 
-
-
-# Checks status of given process
+# Switches processes
 exec (full_command (status_command process)), (error, stdout, stderr) ->
-  is_running = /RUNNING/.test(stdout)
-
   # Kill process if already running
+  is_running = /RUNNING/.test(stdout)
   if is_running
     console.log "#{process} is running."
     stop_process process
 
-  # Start new process
 
+  # Start new process
+  start_process new_process
+  
 
