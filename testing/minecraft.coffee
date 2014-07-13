@@ -9,13 +9,14 @@
 process = "dropbox"
 command = "/usr/local/bin/supervisorctl status #{process}"
 exec = require('child_process').exec
-full_command = "ssh -p2222 bijan@10429network.no-ip.org #{command}"
-console.log full_command
+full_command = (command) ->
+  "ssh -p2222 bijan@10429network.no-ip.org #{command}"
+
 stop_process = (process) ->
   console.log "Shutting down process #{process}..."
   command = "/usr/local/bin/supervisorctl stop #{process}"
   console.log "Running this #{command}"
-  exec full_command, (error, stdout, stderr) ->
+  exec (full_command command), (error, stdout, stderr) ->
     if error
       console.log "There was an error.\n #{stdout}"
     else
@@ -24,7 +25,7 @@ stop_process = (process) ->
 
 
 
-exec full_command, (error, stdout, stderr) ->
+exec (full_command command), (error, stdout, stderr) ->
   is_running = /RUNNING/.test(stdout)
   if is_running
     console.log "#{process} is running."
