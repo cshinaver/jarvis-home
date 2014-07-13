@@ -16,9 +16,8 @@ full_command = (command) ->
   "ssh -p2222 bijan@10429network.no-ip.org #{command}"
 
 stop_process = (process) ->
-  console.log "Shutting down process #{process}..."
+  console.log "Shutting down #{process}..."
   command = "/usr/local/bin/supervisorctl stop #{process}"
-  console.log "Running this #{command}"
   exec (full_command command), (error, stdout, stderr) ->
     if error
       console.log "There was an error.\n #{stdout}"
