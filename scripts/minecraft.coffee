@@ -16,7 +16,7 @@
 #
 
 module.exports = (robot) ->
- robot.respond /server status$/i, (msg) ->
+  robot.respond /server status$/i, (msg) ->
     exec = require('child_process').exec
     pixelmon_command = "/usr/local/bin/supervisorctl status"
     
@@ -28,7 +28,7 @@ module.exports = (robot) ->
       msg.send stdout
       msg.send stderr
 
- robot.respond /switch server from (.*) to (.*)$/i, (msg) ->
+  robot.respond /switch server from (.*) to (.*)$/i, (msg) ->
     process = "dropbox"
     new_process = "transmission"
     status_command = (process) ->
@@ -77,5 +77,5 @@ module.exports = (robot) ->
       if is_running
         console.log "#{process} is running."
         stop_process process, => start_process new_process
-  
+   
 
