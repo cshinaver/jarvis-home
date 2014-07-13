@@ -9,7 +9,8 @@
 # TODO: readd @ in front of exec
 process = "dropbox"
 new_process = "transmission"
-status_command = "/usr/local/bin/supervisorctl status #{process}"
+status_command = (process) ->
+  "/usr/local/bin/supervisorctl status #{process}"
 exec = require('child_process').exec
 full_command = (command) ->
   "ssh -p2222 bijan@10429network.no-ip.org #{command}"
@@ -23,14 +24,14 @@ stop_process = (process) ->
       console.log "There was an error.\n #{stdout}"
     else
       # Check if process sucessfully shut down
-      exec status_command, (error, stdout, stderr) ->
+      exec (status_command process), (error, stdout, stderr) ->
         is_running = /RUNNING/.test(stdout)
         if not is_running
           console.log "#{process} sucessfully shut down"
 
 
 # Checks status of given process
-exec (full_command status_command), (error, stdout, stderr) ->
+exec (full_command (status_command process)), (error, stdout, stderr) ->
   is_running = /RUNNING/.test(stdout)
 
   # Kill process if already running
