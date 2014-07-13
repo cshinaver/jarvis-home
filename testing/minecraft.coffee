@@ -28,6 +28,20 @@ stop_process = (process) ->
         if not is_running
           console.log "#{process} sucessfully shut down"
 
+start_process = (process) ->
+  console.log "Starting #{process}"
+  command = "/usr/local/bin/supervisorctl start #{process}"
+  exec (full_command command), (error, stdout, stderr) ->
+    if error
+      console.log "There was an error.\n #{stdout}"
+    else
+      # Check if process successfully started
+      exec (status_command process), (error, stdout, stderr) ->
+        is_running = /RUNNING/.test(stdout)
+        if is_running
+          console.log "#{process} successfully started"
+
+
 
 # Checks status of given process
 exec (full_command (status_command process)), (error, stdout, stderr) ->
