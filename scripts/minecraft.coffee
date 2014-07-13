@@ -86,7 +86,7 @@ module.exports = (robot) ->
     process = msg.match[1]
     start_process process
 
-  robot.respond /start (.*)$/i, (msg) ->
+  robot.respond /stop (.*)$/i, (msg) ->
     stop_process = (process) ->
       msg.send "Shutting down #{process}..."
       command = "/usr/local/bin/supervisorctl stop #{process}"
