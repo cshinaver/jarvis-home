@@ -13,7 +13,7 @@ status_command = (process) ->
   "/usr/local/bin/supervisorctl status #{process}"
 exec = require('child_process').exec
 full_command = (command) ->
-  "ssh -p2222 bijan@10429network.no-ip.org #{command}"
+  "ssh -p2222 bijan@10.0.1.28 #{command}"
 
 stop_process = (process, callback) ->
   console.log "Shutting down #{process}..."
